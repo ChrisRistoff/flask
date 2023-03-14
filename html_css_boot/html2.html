@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>puppy adoption</title>
+</head>
+
+<body>
+    <h1>Puppy Adoption Page</h1>
+    <h2>Please enter your information to adopt a puppy and we'll email you back.</h2>
+    <p>Please note: First Name, Last Name, Password and Email are required</p>
+    <form method="get" style="padding: 10px;">
+        <label for="first_name">First Name:</label>
+        <input type="text" name="first_name" id="first_name" placeholder="First Name" required>
+        <label for="last_name">Last Name:</label>
+        <input type="text" name="last_name" id="last_name" placeholder="Last Name" required>
+    </form>
+    <form method="get" style="padding: 10px;">
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" placeholder="Email" required>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" placeholder="Password" required>
+        <p>Are you over the age of 18?</p>
+        <label for="yes">Yes:</label>
+        <input type="radio" name="age" value="yes" id="yes">
+        <label for="no">No:</label>
+        <input type="radio" name="age" value="no" id="no">
+
+        <p>Do you have a Credit Card or PayPal</p>
+        <select name="payment">
+            <option value="credit_card">Credit Card</option>
+            <option value="paypal">PayPal</option>
+
+        </select>
+        <label for="yes">Yes:</label>
+        <input type="radio" name="dog" value="yes" id="yes">
+        <label for="no">No:</label>
+        <input type="radio" name="dog" value="no" id="no">
+        <div style="padding:15px">
+            <input type="submit" value="Submit Feedback"></button>
+        </div>
+    </form>
+
+</body>
+
+</html>

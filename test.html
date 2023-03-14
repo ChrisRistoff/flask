@@ -1,12 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Flask Test</title>
+    <meta charset="UTF-8">
+    <title>test title</title>
 </head>
 
 <body>
-    <h1>Flask Test</h1>
+
+    <form method="get">
+        <h3>Do you already own a dog?</h3>
+        <label for="yes">Yes:</label>
+        <input type="radio" name="dog" value="yes" id="yes">
+
+        <label for="no">No:</label>
+        <input type="radio" name="dog" value="no" id="no">
+
+        <h3>How clean is your house(1-5)</h3>
+        <select name="stars">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <p>Any other comments?</p>
+        <textarea name="comments" cols="30" rows="10"></textarea>
+        <input type="submit" value="Submit">
+
+
+    </form>
+
 </body>
+<footer>
+</footer>
 
 </html>
