@@ -1,18 +1,9 @@
-class Book():
-    def __init__(self,title,author,pages):
-        self.title = title
-        self.author = author
-        self.pages = pages
+from flask import Flask
+app = Flask(__name__)
 
-    def __repr__(self):
-        return f"{self.title} by {self.author}"
-        
-    def __len__(self):
-        return self.pages
+@app.route("/")
+def index():
+    return "Hello World!"
 
-mybook = Book('Python Rocks','Jose',250)
-
-length_book = len(mybook)
-
-print(mybook)
-print(length_book)
+if __name__ == "__main__":
+    app.run()

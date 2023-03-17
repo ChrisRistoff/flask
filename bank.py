@@ -43,18 +43,20 @@ class Bank():
         return f"{self.name} has a balance of {self.balance}"
 
 
+    def main(self, bank):
+        while True:
+            choice = bank.choice_prompt()
+            if choice == "D":
+                bank.deposit()
+                print(f"your new balance is {bank.balance}")
+            elif choice == "W":
+                bank.withdraw()
+                print(f"your new balance is {bank.balance}")
+            elif choice == "B":
+                print(bank.__repr__())
+            elif choice == "Q":
+                break
+
 if __name__ == "__main__":
-    bank = Bank("Kris", 0)
-    while True:
-        choice = bank.choice_prompt()
-        if choice == "D":
-            bank.deposit()
-            print(f"your new balance is {bank.balance}")
-        elif choice == "W":
-            bank.withdraw()
-            print(f"your new balance is {bank.balance}")
-        elif choice == "B":
-            print(bank.__repr__())
-        elif choice == "Q":
-            break
-        
+    bankomat = Bank("Kris", 0)
+    bankomat.main(bankomat)
