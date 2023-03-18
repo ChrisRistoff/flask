@@ -1,9 +1,16 @@
-from flask import Flask
-app = Flask(__name__)
+def gg(func):
+    def wrap_func():
+        print("code before func")
 
-@app.route("/")
-def index():
-    return "Hello World!"
+        func()
 
-if __name__ == "__main__":
-    app.run()
+        print("code after func")
+
+    return wrap_func
+@gg
+def func_needs_decorator():
+    print("This function is in need of a decorator")
+    print("This function is in need of a decorator")
+    print("This function is in need of a decorator")
+
+func_needs_decorator()

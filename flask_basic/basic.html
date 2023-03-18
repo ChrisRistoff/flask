@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Flask Basic</title>
+</head>
+
+<body>
+    {%extends "base.html"%}
+
+    {%block content%}
+    
+    {%if user_logged_in%}
+    <h1>Hello, you are logged in</h1>
+    {%else%}
+    <h1>Hello, you are not logged in</h1>
+    {%endif%}
+    <h1>Hello {{variable}}</h1>
+    <h1>{{letters}}</h1>
+    <h1>{{dicto}}</h1>
+    <ul>{%for key,valie in dicto.items()%}
+        <li>{{key}}:{{valie}}</li>
+        {%endfor%}
+    </ul>
+
+    <ul>
+        {%for item in mylist%}
+        <h1>{{item}}</h1>
+        {%endfor%}
+    </ul>
+    <div>
+    {%if 2 in listo%}
+        <h1>2 is in the list</h1>
+    {%else%}
+        <h1>2 is not in the list</h1>
+    {%endif%}
+    </div>
+    {%endblock%}
+
+</body>
+
+</html>
