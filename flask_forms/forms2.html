@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+
+</head>
+
+<div>
+    <form method="POST">
+        {{form.hidden_tag()}}
+        {{form.username.label}} {{form.username()}}
+        <br>
+        {{form.best.label}} {{form.best()}}
+        <br>
+        {{form.mood.label}} {{form.mood()}}
+        <br>
+        {{form.food.label}} {{form.food()}}
+        <br>
+        Any feedback?
+        <br>
+        {{form.feedback()}}
+
+
+
+        {{form.submit()}}
+    </form>
+</div>
+
+</html>
