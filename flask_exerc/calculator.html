@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flask Exerc</title>
+</head>
+<div>
+    {% for mess in get_flashed_messages() %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    {{mess}}
+    {% endfor %}
+    </div>
+</div>
+<body>
+    {%extends "base.html"%}
+    {%block nav%}
+<div class="container">
+    <form method="POST">
+    {{form.hidden_tag()}}
+    {{form.num1.label}} {{form.num1()}}
+    <br>
+    <br>
+    {{form.num2.label}} {{form.num2()}}
+    <br>
+    <br>
+    {{form.submit()}}
+    </form>
+    <br>
+    {%if num1 and num2%}
+    <h1>{{num1 + num2}}</h1>
+    {%else%}
+    <h1>Please input a number</h1>
+    {%endif%}
+
+
+
+</div>
+    {%endblock%}
+</body>
+</html>

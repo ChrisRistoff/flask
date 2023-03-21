@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, redirect, url_for
+from flask import Flask, render_template, session, redirect, url_for, flash
 from flask_wtf import FlaskForm
 from wtforms import (
     StringField,
@@ -9,6 +9,7 @@ from wtforms import (
     SelectField,
     TextField,
     TextAreaField,
+    IntegerField,
 )
 from wtforms.validators import DataRequired
 
@@ -61,8 +62,9 @@ def form2():
         session["food"] = form.food.data
         session["feedback"] = form.feedback.data
         session["date"] = form.date.data
-
-        return redirect(url_for("thanks"))
+        # flash message
+        flash("Thanks for submitting the form!")
+        return redirect(url_for("form2"))
 
     return render_template("forms2.html", form=form)
 

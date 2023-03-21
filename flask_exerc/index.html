@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Flask Exerc</title>
+    <meta charset="utf-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+
+</head>
+{%extends 'base.html'%}
+{%block nav%}
+
+<div class="container">
+<h1>Hello kids</h1>
+<p>This website is made for practicing purposes</p>
+<p>You have 3 otpions so choose wisely</p>
+</div>
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-sm">
+            <div class="card" style="width: 18rem;">
+                <img src="https://thumbs.dreamstime.com/b/calculator-zero-minus-sum-buttons-81330610.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Calculator</h5>
+                <p class="card-text">A very complex calculator that can only add.</p>
+                <a href="{{url_for("calculator")}}" class="btn btn-primary">Open calculator</a>
+        </div>
+            </div>
+            </div>
+
+        <div class="col-sm">
+            <div class="card" style="width: 18rem;">
+                <img src="https://www.rochester.edu/newscenter/wp-content/uploads/2018/07/fea-nothing.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Hello</h5>
+                <p class="card-text">Takes your name and says hello, advanced technology still in testing so we appreciate your patience.</p>
+                <a href="{{url_for("hello")}}" class="btn btn-primary">Beta test Hello</a>
+        </div>
+            </div>
+            </div>
+
+        <div class="col-sm">
+            <div class="card" style="width: 18rem;">
+                <img src="https://blog.jostle.me/hubfs/Frame_9.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Feedback</h5>
+                <p class="card-text">Give us feedback on our calculator and ideas how to improve it &#128169;</p>
+                <a href="{{url_for("feedback")}}" class="btn btn-primary">Give feedback</a>
+        </div>
+            </div>
+            </div>
+
+</div>
+    </div>
+{%endblock%}
+
+</html>
