@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Flask Exerc</title>
+
 </head>
 <div>
     {% for mess in get_flashed_messages() %}
@@ -13,7 +14,7 @@
     {% endfor %}
     </div>
 </div>
-<body>
+<body style="background-color: rgb(212, 200, 183);">
     {%extends "base.html"%}
     {%block nav%}
 <div class="container">
@@ -38,5 +39,9 @@
 
 </div>
     {%endblock%}
+
+{%block foot%}
+
+{%endblock%}
 </body>
 </html>

@@ -12,7 +12,7 @@
     {{mess}}
     {% endfor %}
 </div>
-<body>
+<body style="background-color: rgb(212, 200, 183);">
     {%extends "base.html"%}
     {%block nav%}
 
@@ -34,19 +34,25 @@
 
     </form>
     <br>
-    {%if not name%}
-    <p style="color:red">Please input a name</h1>
-    {%endif%}
-    {%if not feedback%}
-    <p style="color:red">Please give us your feedback</h1>
-    {%endif%}
-    {%if not score%}
-    <p style="color:red">Please score the app</h1>
-    {%endif%}
-    {%if not agree%}
-    <p style="color:red">Please agree to not be stupid</h1>
+    {%if submit%}
+        {%if not name%}
+            <p style="color:red">Please input a name</h1>
+        {%endif%}
+        {%if not feedback%}
+            <p style="color:red">Please give us your feedback</h1>
+        {%endif%}
+        {%if not score%}
+            <p style="color:red">Please score the app</h1>
+        {%endif%}
+        {%if not agree%}
+            <p style="color:red">Please agree to not be stupid</h1>
+        {%endif%}            
     {%endif%}
 
     {%endblock%}
+
+    {%block foot%}
+
+{%endblock%}
 </body>
 </html>
