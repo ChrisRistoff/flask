@@ -13,6 +13,20 @@
 {%extends 'base.html'%}
 {%block navi%}
 
+<div class="container">
+    <h1>Add a new item</h1>
+</div>
+
+<form method="POST">
+    {{form.hidden_tag()}}
+    <div class="container">
+    {{form.name.label}} {{form.name()}}
+    </div>
+    <div class="container">
+    {{form.submit()}}
+    </div>
+
+</form>
 
 
 

@@ -14,6 +14,16 @@
 {%block navi%}
 
 
+<form method="POST">
+    {{form.hidden_tag()}}
+    <div class="container">
+    {{form.id.label}} {{form.id()}}
+    </div>
+    <div class="container">
+    {{form.submit()}}
+    </div>
+
+</form>
 
 
 

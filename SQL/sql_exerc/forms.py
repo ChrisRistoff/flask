@@ -3,7 +3,7 @@ from wtforms import StringField, SubmitField, IntegerField
 
 
 class AddForm(FlaskForm):
-    item_name = StringField("Item Name")
+    name = StringField("Item Model")
     submit = SubmitField("Add Item")
 
 

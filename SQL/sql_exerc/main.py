@@ -24,19 +24,26 @@ class Tech(db.Model):
     __tablename__ = "tech"
 
     id = db.Column(db.Integer, primary_key=True)
-    item_name = db.Column(db.Text)
+    name = db.Column(db.Text)
 
-    def __init__(self, item_name):
-        self.item_name = item_name
+    def __init__(self, name):
+        self.name = name
 
     def __repr__(self):
-        return f"Item Name: {self.item_name}"
+        return f"Item Name: {self.name}"
 
 
 # views
 @app.route("/")
 def index():
     return render_template("index.html")
+
+
+@app.route("/view")
+def view_tech():
+    tech = Tech.query.all()
+
+    return render_template("view_tech.html", tech=tech)
 
 
 @app.route("/add", methods=["GET", "POST"])
@@ -49,16 +56,9 @@ def add():
         db.session.add(new_item)
         db.session.commit()
 
-        return redirect(url_for("veiw_tech"))
+        return redirect(url_for("view_tech"))
 
     return render_template("add_tech.html", form=form)
-
-
-@app.route("/view")
-def view_tech():
-    tech = Tech.query.all()
-
-    return render_template("view_tech.html", tech=tech)
 
 
 @app.route("/delete", methods=["GET", "POST"])
@@ -73,7 +73,7 @@ def delete():
 
         return redirect(url_for("view_tech"))
 
-    return render_template("delete_tech.html", form=form)
+    return render_template("remove_tech.html", form=form)
 
 
 if __name__ == "__main__":

@@ -13,7 +13,17 @@
 {%extends 'base.html'%}
 {%block navi%}
 
+<div class="container">
+    <h1>Here's a list of all items</h1>
+    <ol>
+    {%for item in tech%}
 
+        <li>{{item}}</li>
+        
+    {%endfor%}
+    </ol>
+
+</div>
 
 
 
