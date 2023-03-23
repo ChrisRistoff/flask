@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{url_for('index')}}">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="{{url_for('index')}}">Home</a>
+        <a class="nav-link" href="{{url_for('view_tech')}}">View Tech</a>
+        <a class="nav-link" href="{{url_for('add')}}">Add Tech</a>
+        <a class="nav-link" href="{{url_for('delete')}}">Delete Tech</a>
+      </div>
+    </div>
+  </div>
+</nav>
+{% block navi %}
+{% endblock %}
+
+
+
+
+<div style="height: 100px;">
+
+</div>
+<div class="navbar fixed-bottom" style="background-color: whitesmoke; height: 35px;">
+<div class="container">
+    <p>All rights reserved, obviously.</p>
+</div>
+</div>
+{% block footer %}
+{% endblock %}
