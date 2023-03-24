@@ -14,18 +14,23 @@
 {%block navi%}
 
 <div class="container">
-    <h1>Here's a list of all items</h1>
-    <ol>
-    {%for item in tech%}
-
-        <li>{{item}}</li>
-     
-        <p> {{project}} </p>
-
-    {%endfor%}
-    </ol>
-
+    <h1>Add a new item</h1>
 </div>
+
+<form method="POST">
+    {{form.hidden_tag()}}
+    <div class="container">
+    {{form.project_name.label}} {{form.project_name()}}
+    <br>
+    <br>
+    {{form.tech_id.label}} {{form.tech_id()}}
+    </div>
+    <div class="container">
+    {{form.submit()}}
+    </div>
+
+</form>
+
 
 
 

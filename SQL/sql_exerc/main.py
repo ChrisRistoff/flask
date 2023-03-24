@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, url_for, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from forms import AddForm, DeleteForm
+from forms import AddForm, DeleteForm, AddProjectForm
 
 
 app = Flask(__name__, template_folder="templates")
@@ -25,12 +25,29 @@ class Tech(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Text)
+    project = db.relationship("Project", backref="tech", lazy="dynamic")
+
 
     def __init__(self, name):
         self.name = name
 
     def __repr__(self):
         return f"Item Name: {self.name}"
+
+
+class Project(db.Model):
+    __tablename__ = "project"
+    id = db.Column(db.Integer, primary_key=True)
+    project_name = db.Column(db.Text)
+    tech_id = db.Column(db.Integer, db.ForeignKey("tech.id"))
+
+    def __init__(self, project_name, tech_id):
+        self.project_name = project_name
+        self.tech_id = tech_id
+
+    def __repr__(self):
+        return f"{self.project_name}"
+
 
 
 # views
@@ -42,8 +59,9 @@ def index():
 @app.route("/view")
 def view_tech():
     tech = Tech.query.all()
+    project = Project.query.all()
 
-    return render_template("view_tech.html", tech=tech)
+    return render_template("view_tech.html", tech=tech, project=project)
 
 
 @app.route("/add", methods=["GET", "POST"])
@@ -74,6 +92,22 @@ def delete():
         return redirect(url_for("view_tech"))
 
     return render_template("remove_tech.html", form=form)
+
+
+@app.route("/add_project", methods=["GET", "POST"])
+def add_project():
+    form = AddProjectForm()
+
+    if form.validate_on_submit():
+        project_name = form.project_name.data
+        tech_id = form.tech_id.data
+        new_project = Project(project_name, tech_id)
+        db.session.add(new_project)
+        db.session.commit()
+
+        return redirect(url_for("view_tech"))
+
+    return render_template("add_project.html", form=form)
 
 
 if __name__ == "__main__":
