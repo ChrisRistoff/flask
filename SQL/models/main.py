@@ -36,7 +36,8 @@ class Users(db.Model):
 
     def __repr__(self):
         if self.tech:
-            return f"Name: {self.name} Tech: {self.tech}  Fav brand: {self.brand} "
+            return f"Name: {self.name} Tech: {self.tech} 
+                    Fav brand: {self.brand}"
         else:
             return f"Name: {self.name} Tech: None Fav brand: {self.brand} "
 

@@ -32,22 +32,25 @@ class Tech(db.Model):
         self.name = name
 
     def __repr__(self):
-        return f"Item Name: {self.name}"
+        if self.project.count() > 0:
+            project_names = ", ".join([pr.name for pr in self.project if pr.name])
+            return f"Item Name: {self.name}\n Project Names: {project_names}"
+        else:
+            return f"Item Name: {self.name}"
 
 
 class Project(db.Model):
     __tablename__ = "project"
     id = db.Column(db.Integer, primary_key=True)
-    project_name = db.Column(db.Text)
+    name = db.Column(db.Text)
     tech_id = db.Column(db.Integer, db.ForeignKey("tech.id"))
 
-    def __init__(self, project_name, tech_id):
-        self.project_name = project_name
+    def __init__(self, name, tech_id):
+        self.project_name = name
         self.tech_id = tech_id
 
     def __repr__(self):
         return f"{self.project_name}"
-
 
 
 # views
@@ -59,9 +62,7 @@ def index():
 @app.route("/view")
 def view_tech():
     tech = Tech.query.all()
-    project = Project.query.all()
-
-    return render_template("view_tech.html", tech=tech, project=project)
+    return render_template("view_tech.html", tech=tech)
 
 
 @app.route("/add", methods=["GET", "POST"])
