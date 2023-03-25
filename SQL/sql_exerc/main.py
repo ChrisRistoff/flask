@@ -33,7 +33,7 @@ class Tech(db.Model):
 
     def __repr__(self):
         if self.project.count() > 0:
-            pr_names = ", ".join([pr.name for pr in self.project if pr.name])
+            pr_names = ", ".join([pr.name or "" for pr in self.project.all()])
             return f"Item Name: {self.name}\n Project Names: {pr_names}"
 
         return f"Item Name: {self.name}"
@@ -46,11 +46,11 @@ class Project(db.Model):
     tech_id = db.Column(db.Integer, db.ForeignKey("tech.id"))
 
     def __init__(self, project_name, tech_id):
-        self.project_name = project_name
+        self.name = project_name
         self.tech_id = tech_id
 
     def __repr__(self):
-        return f"{self.project_name}"
+        return f"{self.name}"
 
 
 # views
