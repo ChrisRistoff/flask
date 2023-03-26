@@ -19,7 +19,7 @@ class Bank():
     def deposit(self):
         self.balance += self.get_amount()
         return self.balance
-    
+
 
     def withdraw(self):
         amount = self.get_amount()
@@ -29,13 +29,14 @@ class Bank():
         else:
             self.balance -= amount
             return self.balance
-    
+
 
     def choice_prompt(self):
         choice = ""
         valid_choices = ["D", "W", "B", "Q"]
         while choice not in valid_choices:
-            choice = input("Enter D for deposit, W for withdraw, B for balance, Q to quit: ").upper()
+            choice = input("Enter D for deposit, W for withdraw, B "
+                           +"for balance, Q to quit: ").upper()
         return choice
 
 
