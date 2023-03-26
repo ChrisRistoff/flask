@@ -1,0 +1,39 @@
+You have a table called users. These are registered users. There is a login, password and salt field. The password is hashed, the salt is a string of random characters
+
+Each user's password is hashed with their unique salt, so that if the db is ever leaked, one rainbow table won't immediately disclose every single user's password
+
+Users call /login with their username and password.
+You first check whether this user record exists in the database.
+
+If yes, only then you take the salt from the record and hash the password they sent in
+
+If hashes don't match, they don't log in
+
+    If they do log in, you issue them a session in the sessions table. The important columns here are session_token and csrf_token. Both are random strings of at least length 32, ideally more
+
+Oh also a last_update field to know when the last action by them was
+You have a script that runs every minute or so that checks whether the last_update was longer away in time than the maximum session duration, and delete the session if so
+
+Anyway, when the user logs in, you set the access_token cookie on the login response to the correct token
+Cookies are sent with every request
+So any future request for a page or api method will have a cookie header attached with the access_token
+
+When you get a request which should be authenticated, you compare the access_token received to records in your session table. If it matches one, that's your user.
+
+You update it's last_update to the current time and proceed to the controller
+If they requested a page and a session is not found, you should return a redirect to a login page with the original url they were hoping to reach in a querystring parameter
+
+That way when they do a successful login, you can direct them straight to the page they wanted
+
+If they call an api method and the session doesn't exist, you need to respond 403 Unauthorized
+
+The csrf_token is printed on privileged html pages they request with templates
+It should be attached to any api request which is designed to come from one of your pages
+
+And basically serves as a garantor that this api is being called by a real user with a page, rather than by some api
+
+Even though it's still possible to write a bot that defeats this, it's a higher ceiling
+
+When you check api methods, you need to verify both the access_token and csrf_token
+
+But some api methods maybe don't care if they come from your page or not, so you can decide here
