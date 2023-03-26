@@ -2,14 +2,14 @@ import random
 import string
 import hashlib
 
-def hash_password(password):
+def hashpw(password):
     salt = ''.join(random.choice(string.ascii_letters
                     + string.digits) for _ in range(16))
     salted = password + salt
     hashed = hashlib.sha256(salted.encode('utf-8')).hexdigest()
     return hashed, salt
 
-def check_password(password, hashed, salt):
+def checkpw(password, hashed, salt):
     salted = password + salt
     return hashed == hashlib.sha256(salted.encode('utf-8')).hexdigest()
 
