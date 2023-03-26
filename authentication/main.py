@@ -1,3 +1,4 @@
+from flask_bcrypt import Bcrypt
 import os
 from flask import Flask, render_template, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
@@ -17,15 +18,13 @@ db = SQLAlchemy(app)
 Migrate(app, db)
 
 
-class Users(db):
+class Users(db.Model):
     __tablename__ = "users"
     login = db.Column(db.String(20), primary_key=True)
-    password = db.Column(db.String(20))
     hashed = db.Column(db.String(32))
 
-    def __init__(self, login, password, hashed):
+    def __init__(self, login, hashed):
         self.login = login
-        self.password = password
         self.hashed = hashed
 
     def __repr__(self):
@@ -40,14 +39,13 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed, salt = hashpw(form.password.data)
-        user = Users(login=form.username.data, password=form.password.data
-                     , hashed=hashed)
+        user = Users(login=form.username.data, hashed=hashed)
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
-@app.route('login', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
