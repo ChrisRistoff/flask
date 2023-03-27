@@ -35,7 +35,7 @@ def login():
         #checking if user exists
         if user:
             #checking if password is correct
-            if user.check_password(form.hashedPW.data):
+            if user.check_password(form.password.data):
                 login_user(user)
                 flash('logged in')
 
@@ -53,6 +53,12 @@ def login():
 
     return render_template('login.html', form=form)
 
+
+@app.before_first_request
+def create_tables():
+    db.create_all()
+
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm()
@@ -60,7 +66,7 @@ def register():
     if form.validate_on_submit():
         #getting our user
         user = User(email=form.email.data, username=form.username.data
-                         , hashedPW = form.hashedPW.data)
+                         , password = form.password.data)
 
         #adding user to database
         db.session.add(user)

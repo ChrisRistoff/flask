@@ -15,7 +15,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(64), unique=True, index=True)
     hashedPW = db.Column(db.String(128))
 
-    def __init__(self, username, password, email):
+    def __init__(self,email ,username , password):
         self.email = email
         self.username = username
         self.hashedPW = generate_password_hash(password)
