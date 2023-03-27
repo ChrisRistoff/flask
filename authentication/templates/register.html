@@ -6,10 +6,9 @@
 
 <body>
   <h1>Register</h1>
-  <form method="GET">
+  <form method="POST">
     {{form.hidden_tag()}}
     {{form.username.label}} {{form.username}}<br>
     {{form.password.label}} {{form.password}}<br>
-    {{form.confirm_password.label}} {{form.confirm_password}}<br>
     {{form.submit()}}
   </form>

@@ -7,7 +7,6 @@ from flask_login import current_user
 class RegistrationForm(FlaskForm):
     username = StringField('Username')
     password = PasswordField('Password')
-    confirm_password = PasswordField('Confirm Password')
     submit = SubmitField('Sign Up')
 
 class LoginForm(FlaskForm):
