@@ -1,0 +1,21 @@
+<DOCTYPE! html>
+<html>
+<head>
+    <title>My First Web Page</title>
+</head>
+
+{% extends 'base.html' %}
+{% block content  %}
+
+<h1>Front page</h1>
+
+{% if current_user.is_authenticated %}
+    <p>Hello, {{ current_user.username }}!</p>
+{% else %}
+    <p>Hello, stranger!</p>
+{% endif %}
+
+{% endblock %}
+
+
+</html>
