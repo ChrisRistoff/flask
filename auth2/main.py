@@ -4,6 +4,8 @@ from flask_login import login_user, logout_user, login_required
 from models import User
 from forms import LoginForm, RegisterForm
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_dance.contrib.google import make_google_blueprint, google
+
 
 @app.route('/')
 def index():
@@ -32,8 +34,10 @@ def login():
 
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
+
         #checking if user exists
         if user:
+
             #checking if password is correct
             if user.check_password(form.password.data):
                 login_user(user)
@@ -43,7 +47,7 @@ def login():
                 next = request.args.get('next')
 
                 #checking if next is not empty and if it starts with /
-                if next == None or not next[0] == '/':
+                if next == None or next[0] != '/':
 
                     #if not, redirect to welcome page
                     next = url_for('welcome_user')
@@ -66,7 +70,7 @@ def register():
     if form.validate_on_submit():
         #getting our user
         user = User(email=form.email.data, username=form.username.data
-                         , password = form.password.data)
+                    , password = form.password.data)
 
         #adding user to database
         db.session.add(user)
