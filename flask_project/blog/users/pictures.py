@@ -21,7 +21,12 @@ def add_picture(pic_upload, username):
 
     #open the image
     pic = Image.open(pic_upload)
+
+    #resize the image
     pic.thumbnail(output_size)
+
+    #save the image
     pic.save(filepath)
+
 
     return storage_filename

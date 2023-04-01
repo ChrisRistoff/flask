@@ -10,11 +10,10 @@ app = Flask(__name__)
 #Database Configuration
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-#this is the path to the database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(
             basedir, 'data.sqlite')
-
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = "asdasdasd"
 
 
 db = SQLAlchemy(app)
@@ -31,8 +30,10 @@ login_manager.login_view = 'users.login'
 #blueprints
 from blog.core.views import core
 from blog.error_handlers.handlers import error_pages
+from blog.users.views import users
+
 
 #register the blueprints
 app.register_blueprint(core)
 app.register_blueprint(error_pages)
-
+app.register_blueprint(users)
