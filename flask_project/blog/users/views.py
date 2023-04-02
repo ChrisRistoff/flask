@@ -111,14 +111,12 @@ def user_posts(name):
     #112 get the user's posts
     #113 order by date descending
     #114 paginate the posts
-    posts = Post.query.filter_by(user_id=user.id)\
+    blog_posts = Post.query.filter_by(author=user)\
         .order_by(Post.date.desc())\
         .paginate(page=page, per_page=5)
 
 
-    return render_template('user_posts.html', posts=posts, user=user)
-
-
+    return render_template('user_posts.html', blog_posts=blog_posts, user=user)
 
 
 

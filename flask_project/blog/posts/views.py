@@ -30,10 +30,10 @@ def create_post():
 #Blog Post (View)
 @blog_posts.route('/<int:blog_post_id>')
 def blog_post(blog_post_id):
-    blog_post = Post.query.get_or_404(blog_post_id)
+    post = Post.query.get_or_404(blog_post_id)
 
-    return render_template('blog_post.html',title=blog_post.title,
-                           blog_post=blog_post)
+    return render_template('blog_post.html',title=post.title,
+                           post=post)
 
 #update blog post
 @blog_posts.route('/<int:blog_post_id>/update',methods=['GET','POST'])
@@ -63,7 +63,7 @@ def update(blog_post_id):
     return render_template('create.html',title='Updating',form=form)
 
 #delete blog post
-@blog_posts.route('/<int:blog_post_id>/delete',methods=['GET','POST'])
+@blog_posts.route('/<int:blog_post_id>/delete',methods=['POST'])
 @login_required
 def delete_post(blog_post_id):
     blog_post = Post.query.get_or_404(blog_post_id)

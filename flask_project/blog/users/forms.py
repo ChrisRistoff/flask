@@ -8,16 +8,16 @@ from blog.models import User
 
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
-    password = StringField('Password', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Log In')
 
 
 class RegisterForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
-    password = StringField('Password', validators=[DataRequired(),
+    password = PasswordField('Password', validators=[DataRequired(),
                 EqualTo('pass_confirm', message='Passwords must match')])
-    pass_confirm = StringField('Confirm Password',
+    pass_confirm = PasswordField('Confirm Password',
                                validators=[DataRequired()])
     submit = SubmitField('Register')
 
