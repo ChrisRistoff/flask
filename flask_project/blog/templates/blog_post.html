@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block header %}
+
+<div class="container">
+
+  <h1>{{post.title}}</h1>
+  <h2>By {{post.author.name}}</h2>
+  <h3>Created on {{post.date_posted}}</h3>
+
+  <p>{{post.text}}</p>
+
+  {{if post.author == current_user}}
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  <a href="{{url_for('blog_posts.update_post', post_id=post.id)}}" class="btn btn-primary">Update</a>
+  </button>
+
+  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  <a href="{{url_for('blog_posts.delete_post', post_id=post.id)}}" class="btn btn-danger">Delete</a>
+  </button>
+  {{endif}}
+
+
+</div>

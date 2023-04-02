@@ -45,15 +45,14 @@ class Post(db.Model):
     date = db.Column(db.DateTime, nullable = False, default = datetime.utcnow)
 
 
-    def __init__(self, title, text, topic_id, user_id):
+    def __init__(self, title, text, user_id):
         self.title = title
         self.text = text
-        self.topic_id = topic_id
         self.user_id = user_id
 
 
     def __repr__(self):
-        return f"Post ID: {self.id} --- Date: {self.date} --- Title: {self.title}"
+        return f"Post ID: {self.id} Date: {self.date} Title: {self.title}"
 
 
 
