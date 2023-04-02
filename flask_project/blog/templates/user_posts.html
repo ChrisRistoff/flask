@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block header %}
+
+<div class = "container">
+    <h1>Account</h1>
+    <img src="url_for('static', filename=profile_pics/+current_user.profile_image)">
+    <p>Username: {{ user.username }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>First Name: {{ user.first_name }}</p>
+    <p>Last Name: {{ user.last_name }}</p>
+</div>
+
+{% for post in post.items  %}
+<h3> <a href='{{url_for('posts.post', post_id = post.id)}}'>{{post.title}}</a></h3>
+Written by: <a href='{{url_for('users.user_post','name = post.author.name' )}}'>
+{{post.author.name}}</a>
+
+<p> Published on :  {{post.date}}</p>
+<p> {{post.content}}</p>
+{% if post.author == current_user %}
+<a href='{{url_for('posts.update_post', post_id = post.id)}}'>Update</a>
+<a href='{{url_for('posts.delete_post', post_id = post.id)}}'>Delete</a>
+{% endif %}
+{% if post.author != current_user %}
+<a href='{{url_for('posts.like_post', post_id = post.id)}}'>Like</a>
+{% endif %}
+{% if post.author == current_user %}
+<a href='{{url_for('posts.dislike_post', post_id = post.id)}}'>Dislike</a>
+{% endif %}
+{% if post.author != current_user %}
+<a href='{{url_for('posts.comment_post', post_id = post.id)}}'>Comment</a>
+{% endif %}
+
+<nav aria-label='Page Navigation example'>
+  <ul class='pagination'>
+    <li class='page-item'>
+      <a class='page-link' href='{{url_for('users.user_post', page = post.previous_page)}}' aria-label='Previous'>
+        <span aria-hidden='true'>&laquo;</span>
+        <span class='sr-only'>Previous</span>
+      </a>
+    </li>
+    {% for i in range(1, post.pages + 1) %}
+    <li class='page-item'><a class='page-link' href='{{url_for('users.user_post', page = i)}}'>{{i}}</a></li>
+    {% endfor %}
+    <li` class='page-item'>
+      <a class='page-link' href='{{url_for('users.user_post', page = post.next_page)}}' aria-label='Next'>
+        <span aria-hidden='true'>&raquo;</span>
+        <span class='sr-only'>Next</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+{% endfor %}
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

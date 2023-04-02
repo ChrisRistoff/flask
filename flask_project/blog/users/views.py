@@ -12,9 +12,11 @@ users = Blueprint('users', __name__)
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
-        user = User(email = form.email.data,
-                    name = form.name.data,
-                    password = form.password.data)
+        user = User(name = form.name.data,
+                    email = form.email.data,
+                    password = form.password.data,
+                    )
+
 
         db.session.add(user)
         db.session.commit()
@@ -59,11 +61,11 @@ def login():
 @users.route('/account', methods=['GET', 'POST'])
 @login_required
 def account():
-
     form = UpdateUserForm()
 
     if form.validate_on_submit():
 
+        #check if the user is uploading a new picture
         if form.picture.data:
 
             #add_picture in pictures.py
@@ -74,18 +76,20 @@ def account():
             #update the user's picture
             current_user.profile_image = pic
 
-
+        #update the user's email and name
         current_user.email = form.email.data
         current_user.name = form.name.data
         db.session.commit()
         flash('User Account Updated')
         return redirect(url_for('users.account'))
 
+    #if the user is not submitting the form, populate the form with the 
+    #current user's data
     elif request.method == 'GET':
         form.email.data = current_user.email
         form.name.data = current_user.name
 
-
+    #get the user's profile image
     profile_image = url_for('static', filename='profile_pics/'
                             + current_user.profile_image)
 
@@ -93,7 +97,26 @@ def account():
     return render_template('account.html', form=form)
 
 
+#user's list of posts
+@users.route('/<name>')
+def user_posts(name):
 
+    #get the page number from the url
+    page = request.args.get('page', 1, type=int)
+
+    #get the user's posts
+    #first_or_404() returns a 404 error if the user doesn't exist
+    user = User.query.filter_by(name=name).first_or_404()
+
+    #112 get the user's posts
+    #113 order by date descending
+    #114 paginate the posts
+    posts = Post.query.filter_by(user_id=user.id)\
+        .order_by(Post.date.desc())\
+        .paginate(page=page, per_page=5)
+
+
+    return render_template('user_posts.html', posts=posts, user=user)
 
 
 

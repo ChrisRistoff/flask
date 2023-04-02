@@ -9,17 +9,18 @@ def load_user(user_id):
     return User.query.get(user_id)
 
 
-class User():
+class User(db.Model, UserMixin):
     __tablename__ = 'users'
+
     id = db.Column(db.Integer, primary_key=True)
-    profile_image = db.Column(db.String(20), nullable=False,
-                              default='default.png')
+    profile_image = db.Column(db.String(64), nullable=False,
+                              default='static/profile_picture/default.png')
     name = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(64), unique=True, index=True)
     password_hash = db.Column(db.String(128))
     posts = db.relationship('Post', backref='author', lazy='dynamic')
 
-    def __init__(self, name, email, password_hash):
+    def __init__(self, name, email, password):
         self.name = name
         self.email = email
         self.password_hash = generate_password_hash(password)
@@ -33,14 +34,13 @@ class User():
         return f"Username {self.name}"
 
 
-class Post():
+class Post(db.Model):
     __tablename__ = 'posts'
 
     id = db.Column(db.Integer, primary_key=True)
 
     title = db.Column(db.String(140))
     text = db.Column(db.Text)
-    topic_id = db.Column(db.Integer, db.ForeignKey('topics.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     date = db.Column(db.DateTime, nullable = False, default = datetime.utcnow)
 
@@ -56,9 +56,4 @@ class Post():
         return f"Post ID: {self.id} --- Date: {self.date} --- Title: {self.title}"
 
 
-
-class Topics():
-    __tablename__ = 'topics'
-    id = db.Column(db.Integer, primary_key=True)
-    topic = db.relationship('Post', backref='topic', lazy='dynamic')
 
