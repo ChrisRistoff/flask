@@ -8,6 +8,7 @@ from flask_login import LoginManager
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = "asdasdasd"
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 #Database Configuration
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -32,9 +33,10 @@ login_manager.login_view = 'users.login'
 from blog.core.views import core
 from blog.error_handlers.handlers import error_pages
 from blog.users.views import users
-
+from blog.posts.views import blog_posts
 
 #register the blueprints
 app.register_blueprint(core)
 app.register_blueprint(error_pages)
 app.register_blueprint(users)
+app.register_blueprint(blog_posts)

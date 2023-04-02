@@ -69,7 +69,7 @@ def account():
         if form.picture.data:
 
             #add_picture in pictures.py
-            name = add_picture(form.picture.data)
+            name = current_user.name
 
             pic = add_picture(form.picture.data, name)
 
@@ -77,10 +77,9 @@ def account():
             current_user.profile_image = pic
 
         #update the user's email and name
-        current_user.email = form.email.data
         current_user.name = form.name.data
+        current_user.email = form.email.data
         db.session.commit()
-        flash('User Account Updated')
         return redirect(url_for('users.account'))
 
     #if the user is not submitting the form, populate the form with the 
@@ -90,11 +89,12 @@ def account():
         form.name.data = current_user.name
 
     #get the user's profile image
-    profile_image = url_for('static', filename='profile_pics/'
+    profile_image = url_for('static', filename='profile_picture/'
                             + current_user.profile_image)
 
 
-    return render_template('account.html', form=form)
+    return render_template('account.html',profile_image=profile_image,
+                           form=form)
 
 
 #user's list of posts

@@ -13,7 +13,7 @@ def add_picture(pic_upload, username):
     storage_filename = str(username) + '.' + ext_type
 
     #get the path to the static folder
-    filepath = os.path.join(current_app.root_path, 'static/profile_pics',
+    filepath = os.path.join(current_app.root_path, 'static/profile_picture',
                             storage_filename)
 
     #resize the image
