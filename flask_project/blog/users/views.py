@@ -119,7 +119,10 @@ def user_posts(name):
     return render_template('user_posts.html', blog_posts=blog_posts, user=user)
 
 
-
+#test page
+@users.route('/test')
+def test():
+    return render_template('test.html')
 
 
 
